@@ -16,7 +16,9 @@ exports.signUp = async(req,res)=>{
             });
         }
 
-        const user = await User.findOne({email})
+        console.log(email)
+
+        let user = await User.findOne({email})
 
         if(user && user.isVerified){
             return res.status(400).json({
@@ -24,6 +26,9 @@ exports.signUp = async(req,res)=>{
                 message: "User already exists"
             });
         }
+
+        console.log("laxman",user)
+
         
 
         //generate otp
