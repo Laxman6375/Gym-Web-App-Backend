@@ -8,15 +8,14 @@ const jwt = require("jsonwebtoken")
 
 exports.signUp = async(req,res)=>{
     try {
-        const {firstName,lastName, email, password,weight,height,age} = req.body;
+        const {firstName,lastName, email, password} = req.body;
+
         if(!firstName,!lastName,!email,!password){
             return res.status(400).json({
                 sucess: false,
                 message: "All feilds marked with * are required"
             });
         }
-
-        console.log(email)
 
         let user = await User.findOne({email})
 
@@ -26,10 +25,6 @@ exports.signUp = async(req,res)=>{
                 message: "User already exists"
             });
         }
-
-        console.log("laxman",user)
-
-        
 
         //generate otp
     var otp = otpGenerator.generate(6, {
@@ -76,9 +71,6 @@ exports.signUp = async(req,res)=>{
             lastName,
             email,
             password: hashedPassword,
-            weight,
-            height,
-            age,
             isVerified:false
         });
         await user.save();
@@ -216,5 +208,43 @@ exports.login = async(req,res)=>{
             message: 'Internal server error',
             error
         })
+    }
+}
+
+exports.updateProfile = async (req, res) => {
+    try {
+        const { firstName, lastName,email } = req.body;
+
+        if (!firstName || !lastName) {
+            return res.status(400).json({
+                success: false,
+                message: "First name and last name are required"
+            });
+        }
+
+        let user = await User.findOne({email:email});
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found"
+            });
+        }
+
+        user.firstName = firstName;
+        user.lastName = lastName;
+
+        await user.save();
+
+        res.json({
+            success: true,
+            message: "Profile updated successfully",
+            user
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Internal server error',
+            error
+        });
     }
 }

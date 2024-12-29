@@ -8,6 +8,7 @@ const cors = require("cors");
 //routes
 const userRoutes = require("./routes/User")
 const productRoutes = require("./routes/Product")
+const blogRoutes = require("./routes/Blog")
 
 ConnectDB();
 const PORT = process.env.PORT || 4000
@@ -29,6 +30,7 @@ app.use(
 
 app.use("/auth",userRoutes)
 app.use("/product",productRoutes)
+app.use("/blog",blogRoutes)
 
 app.get("/", (req, res) => {
     return res.json({

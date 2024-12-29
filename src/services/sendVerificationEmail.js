@@ -8,9 +8,9 @@ const sendVerificationEmail = async ({email, otp}) =>{
         "Verification Email from Royal Gym",
         otpTemplate(otp)
       );
-       console.log("Email Sent Successfully : ", mailResponse);
+      //  console.log("Email Sent Successfully : ", mailResponse);
     } catch (error) {
-       console.log("error occured while sending mails:".error);
+      //  console.log("error occured while sending mails:".error);
       throw error;
     }
   }

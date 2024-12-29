@@ -18,15 +18,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    weight:{
-        type: Number,
-    },
-    height:{
-        type: Number,
-    },
-    age:{
-        type: Number,
-    },
     role:{
         type: String,
         enum:['User','Admin'],

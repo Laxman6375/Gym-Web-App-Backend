@@ -13,7 +13,7 @@ try {
         api_secret: process.env.API_SECRET
       });
 } catch (error) {
-    console.log(error);
+    // console.log(error);
 }
 
 module.exports = cloudinary;
