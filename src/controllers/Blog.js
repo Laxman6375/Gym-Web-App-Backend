@@ -101,3 +101,28 @@ exports.getBlog = async (req, res) => {
         })
     }
 }
+
+exports.deleteBlog = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const blog = await Blog.findByIdAndDelete(id);
+
+        if (!blog) {
+            return res.status(404).json({
+                success: false,
+                message: "Blog not found",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Blog deleted successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal error",
+            error,
+        });
+    }
+}

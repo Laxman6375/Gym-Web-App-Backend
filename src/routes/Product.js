@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {createProduct, getProducts, getProduct} = require("../controllers/Product");
+const {createProduct, getProducts, getProduct, deleteProduct} = require("../controllers/Product");
 const upload = require("../config/multer");
 
 //Auth routes
@@ -14,5 +14,6 @@ router.post("/create",upload.single('image'),(req, res, next) => {
 },createProduct)
 .get("/allProducts",getProducts)
 .get("/:id",getProduct)
+.delete("/:id",deleteProduct)
 
 module.exports = router;

@@ -12,16 +12,15 @@ exports.createProduct = async (req, res) => {
             });
         }
 
+        
         const productPicture = req.file.buffer;
         const productImage = await uploadImageToCloudinary(
-          productPicture,
-          process.env.FOLDER_NAME,
-          1000,
-          1000
+            productPicture,
+            process.env.FOLDER_NAME,
+            1000,
+            1000
         );
-
-        
-
+                
         const product = new Product({
             name,
             price,
@@ -83,5 +82,31 @@ exports.getProduct = async (req, res) => {
             success: false,
             message: "Internel error",
         })
+    }
+}
+
+exports.deleteProduct = async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log("laxman...",id);
+        const product = await Product.findByIdAndDelete(id);
+
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Product not found",
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Product deleted successfully",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal error",
+            error,
+        });
     }
 }

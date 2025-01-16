@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {createBlog, getBlogs, getBlog} = require("../controllers/Blog");
+const {createBlog, getBlogs, getBlog, deleteBlog} = require("../controllers/Blog");
 const upload = require("../config/multer");
 
 //Auth routes
@@ -14,5 +14,7 @@ router.post("/create",upload.single('image'),(req, res, next) => {
 },createBlog)
 .get("/allBlogs",getBlogs)
 .get("/:id",getBlog)
+.delete("/:id",deleteBlog)
+
 
 module.exports = router;
