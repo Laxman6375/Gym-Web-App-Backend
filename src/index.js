@@ -15,18 +15,14 @@ const PORT = process.env.PORT || 4000
 
 app.use(express.json()); 
 app.use(cookieParser());
-// app.use(
-//   cors({
-//     origin: ["*"],
-//   })
-// );
 
 app.use(
   cors({
-    origin: "*", // Allow all origins
-    credentials: true, // If you need to allow cookies or authentication headers
+    origin: ["http://localhost:3000", "https://your-live-url.com"],
+    credentials: true, 
   })
 );
+
 
 app.use("/auth",userRoutes)
 app.use("/product",productRoutes)
