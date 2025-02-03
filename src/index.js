@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://royal-gym-bca.netlify.app/"],
+    origin: ["https://royal-gym-bca.netlify.app/", "http://localhost:3000"],
     credentials: true, 
   })
 );
